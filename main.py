@@ -53,7 +53,7 @@ def main():
         for asteroid in asteroids:
             for bullet in shots:
                 if bullet.collided(asteroid):
-                    asteroid.kill()
+                    asteroid.split()
                     bullet.kill()
 
         # Run the drawing loop
