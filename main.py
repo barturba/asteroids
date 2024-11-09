@@ -30,7 +30,7 @@ def main():
 
     AsteroidField.containers = updatable
 
-    Shot.containers = (updatable, drawable)
+    Shot.containers = (shots, updatable, drawable)
 
     # Initialize a Player object
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
@@ -48,6 +48,13 @@ def main():
             if asteroid.collided(player):
                 print("Game over!")
                 sys.exit(0)
+
+        # Check for shot collisions
+        for asteroid in asteroids:
+            for bullet in shots:
+                if bullet.collided(asteroid):
+                    asteroid.kill()
+                    bullet.kill()
 
         # Run the drawing loop
         for sprite in drawable:
