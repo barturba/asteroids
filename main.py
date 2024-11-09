@@ -13,14 +13,24 @@ def main():
     clock = pygame.time.Clock()
     dt = 0  # Delta time
 
+    # Create Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     # Initialize a Player object
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
     while True:
         pygame.Surface.fill(screen, (0, 0, 0))
 
-        player.update(dt)
-        player.draw(screen)
+        # Run the update loop
+        for sprite in updatable:
+            sprite.update(dt)
+
+        # Run the drawing loop
+        for sprite in drawable:
+            sprite.draw(screen)
 
         pygame.display.flip()
         for event in pygame.event.get():
